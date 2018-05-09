@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body {
+  background: silver
+}
+
+h2 {
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: red;
+  color: white;
+}
+
+div {
+  background: black;
+  width: 50%;
+  height: 50%;
+  padding: 0em 0em 0em 0em;
+  border: solid blue;
+  border-radius: 100px;
+  margin: 20% 25% 15% 25%;
+  box-shadow: 0px 50px 50px 0px grey;
+}
+
+p {
+  text-align: center;
+  color: white;
+}
+
+span {
+  font-weight: bold;
+  color: red;
+  font-size: 3em;
+}
+
+</style>
+
+<head>
+<body id="body">
+  <div>
+    <h2>Time Left</h2>
+
+    <p id="paragraph">Right now, you have <br> <span id="time"></span> <br> left! </p>
+    <p id="countdown_complete"> <span id="time"></span> </p>
+  </div>
+
+<script>
+var d = new Date();
+var e = new Date(2018, 4, 7, 7, 30, 00);
+var diff = Math.abs(e - d);
+
+if (d >= e) {
+	document.body.style.background = "url('https://media.giphy.com/media/vY4pH7pKJwTXa/giphy.gif') no-repeat center";
+      document.body.style.backgroundSize = 'cover';
+
+par = document.getElementById("paragraph").innerHTML = "";
+
+document.getElementById("time").innerHTML = "Countdown Finished!";
+
+} else if (diff <= 600000) {
+	var minutes = diff*(1/1000)*(1/60);
+	var minutesFloor = Math.floor(minutes);
+	var minutesLeft = minutesFloor.toFixed(0)
+
+	//seconds
+	var minuteSecondsConv = ((minutes).toFixed(4)).toString().substr(-5);
+	var seconds = (minuteSecondsConv*(60/1)).toFixed(0);
+	//alert(secondsCalc);
+
+	if (minutes <= 1) {
+		document.getElementById("time").innerHTML = seconds + " seconds";
+	} else if (minutes > 1) {
+	    	document.getElementById("time").innerHTML = minutesLeft + " minutes, " + seconds + " seconds";
+	}
+} else if (diff > 86400000) {
+	var days = diff*(1/1000)*(1/3600)*(1/24);
+	var daysFloor = Math.floor(days);
+	var daysLeft = daysFloor.toFixed(0);
+
+	///////////////////////////////////////////////////////////////////////////////
+	//hours
+	var dayHoursConv = (days.toFixed(5)).toString().substr(-6);
+	var hours = (dayHoursConv*(24/1));
+	var hoursFloor = Math.floor(hours);
+	var hoursLeft = hoursFloor.toFixed(0);
+
+	///////////////////////////////////////////////////////////////////////////////
+	//minutes
+	var hourMinutesConv = ((dayHoursConv*(24/1)).toFixed(5)).toString().substr(-6);
+	var minutes = (hourMinutesConv*(60/1));
+	var minutesFloor = Math.floor(minutes);
+	var minutesLeft = minutesFloor.toFixed(0)
+
+	///////////////////////////////////////////////////////////////////////////////
+	//seconds
+	var minuteSecondsConv = ((hourMinutesConv*(60/1)).toFixed(5)).toString().substr(-6);
+	var seconds = (minuteSecondsConv*(60/1)).toFixed(0);
+	//alert(seconds);
+
+	if (days <= 1) {
+		document.getElementById("time").innerHTML = hoursLeft + " hours, " + minutesLeft + " minutes, " + seconds + " seconds";
+	} else if (days > 1) {
+	    	document.getElementById("time").innerHTML = daysLeft + " day, " + hoursLeft + " hours, " + minutesLeft + " minutes, " + seconds + " seconds";
+	}
+
+} else if (diff <= 86400000) {
+	var hours = diff*(1/1000)*(1/3600);
+	var hoursFloor = Math.floor(hours);
+	var hoursLeft = hoursFloor.toFixed(0);
+	//alert(hoursFloor);
+
+	///////////////////////////////////////////////////////////////////////////////
+	//minutes
+	var hourMinutesConv = ((hours).toFixed(4)).toString().substr(-5);
+	var minutes = (hourMinutesConv*(60/1));
+	var minutesFloor = Math.floor(minutes);
+	var minutesLeft = minutesFloor.toFixed(0)
+	//alert(minutesCalc);
+
+	///////////////////////////////////////////////////////////////////////////////
+	//seconds
+	var minuteSecondsConv = ((hourMinutesConv*(60/1)).toFixed(2)).toString().substr(-3);
+	var seconds = (minuteSecondsConv*(60/1)).toFixed(0);
+	//alert(secondsCalc);
+
+	if (hours <= 1) {
+		document.getElementById("time").innerHTML = minutesLeft + " minutes, " + seconds + " seconds";
+	} else if (hours > 1) {
+	    	document.getElementById("time").innerHTML = hoursLeft + " hours, " + minutesLeft + " minutes, " + seconds + " seconds";
+	}
+}
+
+if (e > d) {
+	setTimeout("location.reload(true)", 500);
+} if (e = d) {
+
+}
+
+</script>
+
+</body>
+</html>
